@@ -4,14 +4,11 @@ import sys
 import os
 import platform
 import atexit
-import colorama
 import win32con
 import win32api
 from cfonts import render
-from colorama import Fore, Style
 
 sistema_operacional = platform.system()
-colorama.init(autoreset=True)
 cor = "GREEN" #essa é a cor inicial
 tempo: int = 2
 corverde = 0x90 #codigo correspondente a tecla "num lock"
@@ -51,11 +48,7 @@ def limpar_console():
         os.system('set +x')
 
 def print_and_update(text,x): 
-    y = getattr(Fore, x)
     limpar_console()    
-    #sys.stdout.write(f"{y}{Style.BRIGHT}{text}{Style.RESET_ALL}")
-    texto = f"{y}{Style.BRIGHT}{text}{Style.RESET_ALL}"
-    #print(f.renderText(texto))
     if x == "GREEN": #tive que adaptar em if, pois por variável usando get.attr ou normal não ia de jeito nenhum
         output = render(text, colors=['green', 'yellow'], align='center')
     elif x == "YELLOW":
@@ -65,8 +58,6 @@ def print_and_update(text,x):
     else:
         output = render("ERROR", colors=['red', 'yellow'], align='center') 
     print(output)
-    sys.stdout.flush()
-    sys.stdout.write('\r')
 
 
 def ativarteclado(codigo): 
